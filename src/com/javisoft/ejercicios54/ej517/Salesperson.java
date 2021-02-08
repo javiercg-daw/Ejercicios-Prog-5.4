@@ -4,9 +4,9 @@ public class Salesperson extends Employee {
     private double sales;
     private double commission;
 
-    public Salesperson(String dni, double salary, String name, double sales, double commission) {
+    public Salesperson(String dni, double salary, String name, double commission) {
         super(dni, salary, name);
-        this.sales = sales;
+        this.sales = 0.0;
         this.commission = commission;
     }
 
@@ -33,5 +33,10 @@ public class Salesperson extends Employee {
 
     public void sell(double amount) {
         this.setSales(sales + amount);
+    }
+
+    @Override
+    public String toString() {
+        return getName() + ", with DNI " + getDni() + ", sales: " + sales + ", commission: " + (commission * 100) + "%.";
     }
 }

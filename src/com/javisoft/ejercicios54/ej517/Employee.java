@@ -6,7 +6,10 @@ public class Employee {
     private double salary;
     private String name;
 
-    public Employee(String dni, double salary, String name) {
+    public Employee(String dni, double salary, String name) throws IllegalArgumentException {
+        if (!isValidDNI(dni)) {
+            throw new IllegalArgumentException("Invalid DNI number.");
+        }
         this.dni = dni;
         this.salary = salary;
         this.name = name;
@@ -34,5 +37,11 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    private static boolean isValidDNI(String dni) {
+        final char[] DNI_LETTERS = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B',
+                'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+        return dni.matches("\\d{8}[a-zA-Z]") && dni.length() == 9 && dni.toUpperCase().charAt(8) == DNI_LETTERS[Integer.parseInt(dni.substring(0, 8)) % 23];
     }
 }
